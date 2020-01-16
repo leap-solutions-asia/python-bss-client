@@ -14,10 +14,10 @@ high-level abstraction for commonly used methods.
 Ideally we'll implement high-level wrappers for every possible API calls,
 however we're not there yet.
 
-## Instalation
+## Installation
 
 ```
-$ pip install bss-client
+$ pip install git+https://github.com/leap-solutions-asia/python-bss-client.git
 ```
 
 ## Basic Usage
