@@ -35,11 +35,11 @@ class Request(object):
         ordered_params = OrderedDict()
         for key, value in sorted(self.params.items()):
             ordered_params[key] = value
-        params_str = urllib.urlencode(ordered_params, doseq=True)
+        params_str = urllib.parse.urlencode(ordered_params, doseq=True)
         path = "/{0}".format(path.lstrip('/'))
         signature_str = path + params_str.lower()
-        hmac_dig = hmac.new(self.secret, signature_str, hashlib.sha1).digest()
-        signature = urllib.quote(base64.encodestring(hmac_dig).strip())
+        hmac_dig = hmac.new(self.secret.encode('utf-8'), signature_str.encode('utf-8'), hashlib.sha1).digest()
+        signature = urllib.parse.quote(base64.b64encode(hmac_dig).decode("utf-8"), "")
         params_str = "{0}&signature={1}".format(params_str, signature)
         url = "{0}{1}?{2}".format(self.endpoint.rstrip('/'), path, params_str)
         return url
