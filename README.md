@@ -17,7 +17,7 @@ however we're not there yet.
 ## Instalation
 
 ```
-$ pip install bss-client
+$ pip install git+https://github.com/leap-solutions-asia/python-bss-client.git
 ```
 
 ## Basic Usage
