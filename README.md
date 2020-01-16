@@ -33,7 +33,7 @@ secret = 'my api secret'
 
 client = BSSClient(endpoint, key, secret)
 rsp_json = client.list_subscriptions()
-print rsp_json
+print(rsp_json)
 ```
 
 With low-level signed request wrapper
@@ -47,5 +47,5 @@ req.add_param('tenantparam', 'uuid')
 req.add_param('productbundleid', 'mybundleid')
 ...
 rsp = req.request('POST', '/subscriptions')
-print rsp
+print(rsp)
 ```

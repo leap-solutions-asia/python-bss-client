@@ -46,7 +46,7 @@ class TestRequest(unittest.TestCase):
         result = req.request("get", "something")
         self.assertEqual(result, response)
         qs = "?_=1404950400000&abc=z&apiKey=xxx&xyz=a" \
-             "&signature=MYW/iD3G%2Be55pwt55xqbIl4ARSw%3D"
+             "&signature=MYW%2FiD3G%2Be55pwt55xqbIl4ARSw%3D"
         request_mock.assert_called_with(
             "GET",
             "http://localhost/something" + qs,
