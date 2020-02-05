@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-__version__ = '0.2.2'
+__version__ = '0.2.3'
 
 setup(
     name="bss-client",
@@ -20,6 +20,11 @@ setup(
             "flake8==3.7.9",
             "mock==3.0.5",
             "freezegun==0.3.13",
+        ],
+    },
+    entry_points={
+        'console_scripts': [
+            'bss = bss_client:main',
         ],
     },
 )

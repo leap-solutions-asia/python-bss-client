@@ -1,3 +1,7 @@
+import os
+from configparser import ConfigParser, NoSectionError
+from pathlib import Path, PurePath
+
 from bss_client.exception import BSSError
 from bss_client.request import Request
 
@@ -79,3 +83,36 @@ class BSSClient(object):
         req = self.create_request()
         rsp = req.request('DELETE', '/subscriptions/{0}'.format(subscription_uuid))
         return self._handle_json_response(rsp)
+
+
+def read_config(ini_group=None, config_file=None):
+    if config_file is None:
+        paths = [
+            PurePath(Path.home(), '.cloudstack.ini'),
+            PurePath(Path.cwd(), 'cloudstack.ini'),
+        ]
+
+        for file in paths:
+            if Path(file).is_file():
+                config_file = file
+                break
+
+        if config_file is None:
+            raise SystemExit('Config file not found.')
+
+    if ini_group is None:
+        ini_group = os.getenv('CPBM_REGION', 'cpbm')
+
+    conf = ConfigParser()
+    conf.read(config_file)
+
+    try:    
+        return {
+            'endpoint': conf.get(ini_group, "endpoint"),
+            'key'     : conf.get(ini_group, "key"),
+            'secret'  : conf.get(ini_group, "secret"),
+        }
+    except NoSectionError:
+        raise SystemExit(f'Error: section "{ini_group}" not in config')
+    except:
+        raise SystemExit(f'Error: Cannot get endpoint, key and secret from config')

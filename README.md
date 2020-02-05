@@ -49,3 +49,52 @@ req.add_param('productbundleid', 'mybundleid')
 rsp = req.request('POST', '/subscriptions')
 print(rsp)
 ```
+
+## Command Line
+
+### Create config file
+
+```bash
+cat <<EOF > ~/.cloudstack.ini
+[cpbm]
+endpoint = YOUR_API_ENDPOINT
+key=YOUR_API_KEY
+secret= YOUR_SECRET_KEY
+EOF
+```
+
+### Basic Usage
+
+``` bash
+$ bss [-m METHOD] PATH [[key=value] [key=value] ...]
+```
+
+Get account list
+```bash
+$ bss /accounts
+```
+
+Get account list with state is NEW
+```bash
+$ bss /accounts state=NEW
+```
+
+Create a new account
+```bash
+$ bss -m POST /accounts \
+      accountname=test \
+      accounttypeid=10 \
+      currencycode=THB \
+      ownerfirstname=Test \
+      ownerlastname=Test \
+      owneremail=test@example.com \
+      ownerusername=test \
+      countrycode=66 \
+      state=test \
+      city=bangkok \
+      street1=test \
+      zipcode=11111 \
+      isdcode=1 \
+      phonenumber=111111 \
+      creditCardInformationCaptured=YES
+```
