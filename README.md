@@ -98,3 +98,25 @@ $ bss -m POST /accounts \
       phonenumber=111111 \
       creditCardInformationCaptured=YES
 ```
+
+### With Docker
+
+Get docker image
+```bash
+$ docker pull leapsolutionsasia/python-bss-client
+```
+
+Run command with docker
+```bash
+$ docker run \
+    --rm \
+    -v $(pwd):/work \
+    -it leapsolutionsasia/python-bss-client \
+    [-m METHOD] PATH [[key=value] [key=value] ...]
+```
+
+Run command via wrapper script
+```bash
+$ ./run.sh [-m METHOD] PATH [[key=value] [key=value] ...]
+```
+
